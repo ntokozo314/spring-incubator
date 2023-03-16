@@ -1,4 +1,4 @@
-package entelect.training.incubator.spring.customer.config;
+package entelect.training.incubator.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,7 +14,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Disclaimer! In a production system you will never store your credentials in either clear text or in the code.
      * It is done here so that development is both easy to understand and change.
-     * The user
+     * The commented code below shows you how to connect to a DB. You will also want to use some kind of password encoding/hashing.
      */
 
     //    @Autowired
@@ -35,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // !!! Disclaimer: NEVER DISABLE CSRF IN PRODUCTION !!!
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/customers/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/customers/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/booking/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/booking/**").hasAnyRole("SYSTEM", "ADMIN")
                 .anyRequest().denyAll()
                 .and()
                 .httpBasic();

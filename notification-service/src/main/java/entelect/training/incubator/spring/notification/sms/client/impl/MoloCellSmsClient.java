@@ -1,6 +1,7 @@
 package entelect.training.incubator.spring.notification.sms.client.impl;
 
 import entelect.training.incubator.spring.notification.sms.client.SmsClient;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +11,12 @@ import org.springframework.stereotype.Service;
 public class MoloCellSmsClient implements SmsClient {
     
     @Override
-    public void sendSms(String phoneNumber, String message) {
-        System.out.println(String.format("Sending SMS, destination='{}', '{}'", phoneNumber, message));
+    public void sendSms(String name) {
+        System.out.println(String.format("Sending SMS, destination='{}'", name));
+    }
+
+    @JmsListener(destination = "CoolNewQueue")
+    public void sendSmsds(String name) {
+        System.out.println(String.format("Sending SMS, destination='{}'", name));
     }
 }

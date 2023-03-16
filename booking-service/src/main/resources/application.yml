@@ -1,6 +1,6 @@
 spring:
   application:
-    name: flight-service
+    name: booking-service
   datasource:
     driver-class-name: org.hsqldb.jdbc.JDBCDriver
     url: jdbc:hsqldb:mem:testdb;DB_CLOSE_DELAY=-1
@@ -9,8 +9,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+  activemq:
+    broker-url: tcp://localhost:61616?wireFormat.maxInactivityDurationInitalDelay=30000
+    user: admin
+    password: admin
+
+
 
 server:
-  port: 8200
+  port: 8201
   error:
     include-message: always

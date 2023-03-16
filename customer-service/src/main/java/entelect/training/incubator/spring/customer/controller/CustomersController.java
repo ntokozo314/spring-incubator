@@ -45,7 +45,7 @@ public class CustomersController {
         }
 
         LOGGER.info("No customers could be found");
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(null);
     }
 
     @GetMapping("{id}")
